@@ -17,7 +17,8 @@ class YapFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'content' => $this->faker->text,
+            'user_id' => \App\Models\User::factory(),
         ];
     }
 }

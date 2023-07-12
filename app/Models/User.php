@@ -59,4 +59,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the yaps for the user.
+     */
+    public function yaps()
+    {
+        return $this->hasMany(Yap::class);
+    }
 }

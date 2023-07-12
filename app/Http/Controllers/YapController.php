@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\StoreYapAction;
 use App\Models\Yap;
 use App\Http\Requests\StoreYapRequest;
 use App\Http\Requests\UpdateYapRequest;
@@ -17,33 +18,24 @@ class YapController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreYapRequest $request)
+    public function store(StoreYapRequest $request, StoreYapAction $action)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+
+        $action->execute($data);
+
+        return redirect()
+            ->route('home')
+            ->with('success', 'Yap created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Yap $yap)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Yap $yap)
     {
         //
     }
@@ -61,6 +53,12 @@ class YapController extends Controller
      */
     public function destroy(Yap $yap)
     {
-        //
+        $this->authorize('delete', $yap);
+
+        $yap->delete();
+
+        return redirect()
+            ->route('home')
+            ->with('success', 'Yap deleted successfully.');
     }
 }
