@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
-import { HomeIcon } from '@heroicons/vue/24/outline';
-import { HomeIcon as SolidHomeIcon } from '@heroicons/vue/24/solid';
+import { HomeIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
+import { HomeIcon as SolidHomeIcon, MagnifyingGlassIcon as SolidMagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
+import MenuNavLink from '@/Components/Menu/MenuNavLink.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
@@ -50,21 +51,12 @@ const logout = () => {
                                 </div>
                                 <div class="flex flex-col">
                                     <nav class="mt-4">
-                                        <Link :href="route('home')" :class="{ 'font-black': route().current('home') }"
-                                            class="flex items-center gap-x-4 px-2 py-2 rounded-md text-xl font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/30 hover:text-gray-900 dark:hover:text-gray-300 transition ease-in-out duration-150">
-                                        <SolidHomeIcon v-if="route().current('home')"
-                                            class="h-6 w-6 text-gray-600 dark:text-gray-200" />
-                                        <HomeIcon v-else class="h-6 w-6 text-gray-400 dark:text-gray-600" />
-                                        Home
-                                        </Link>
-                                        <Link :href="route('explore')" :active="route().current('explore')"
-                                            :class="{ 'font-black': route().current('explore') }"
-                                            class="flex items-center gap-x-4 px-2 py-2 rounded-md text-xl font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-gray-900 dark:hover:text-gray-300 transition ease-in-out duration-150">
-                                        <SolidHomeIcon v-if="route().current('explore')"
-                                            class="h-6 w-6 text-gray-600 dark:text-gray-400" />
-                                        <HomeIcon v-else class="h-6 w-6 text-gray-400 dark:text-gray-600" />
-                                        Explore
-                                        </Link>
+                                        <MenuNavLink :href="route('home')" :active="route().current('home')"
+                                            :default-icon="HomeIcon" :active-icon="SolidHomeIcon"
+                                            name="Home" />
+                                        <MenuNavLink :href="route('explore')" :active="route().current('explore')"
+                                            :default-icon="MagnifyingGlassIcon" :active-icon="SolidMagnifyingGlassIcon"
+                                            name="Explore" />
                                     </nav>
                                 </div>
                             </div>
