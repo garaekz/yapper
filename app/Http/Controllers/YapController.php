@@ -6,6 +6,7 @@ use App\Actions\StoreYapAction;
 use App\Models\Yap;
 use App\Http\Requests\StoreYapRequest;
 use App\Http\Requests\UpdateYapRequest;
+use Inertia\Inertia;
 
 class YapController extends Controller
 {
@@ -14,7 +15,9 @@ class YapController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Home', [
+            'yaps' => Yap::with('user')->latest()->paginate(50),
+        ]);
     }
 
     /**

@@ -6,8 +6,8 @@ const props = defineProps({
     href: String,
     active: Boolean,
     name: String,
-    defaultIcon: Object,
-    activeIcon: Object,
+    defaultIcon: Function,
+    activeIcon: Function,
 });
 
 const DefaultIconComponent = computed(() => (props.active ? props.activeIcon : props.defaultIcon));
