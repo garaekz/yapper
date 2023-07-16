@@ -17,20 +17,10 @@ Route::middleware([
     Route::get('/home', function () {
         return Inertia::render('Home');
     })->name('home');
-
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/explore', function () {
+        return Inertia::render('Home');
+    })->name('explore');
 
     Route::post('/yaps', [YapController::class, 'store'])->name('yaps.store');
     Route::delete('/yaps/{yap}', [YapController::class, 'destroy'])->name('yaps.destroy');
-});
-
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
 });
